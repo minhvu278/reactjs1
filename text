@@ -1,0 +1,98 @@
+import React, {Component} from 'react';
+import Product from "./components/Product";
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: [
+                {
+                    id: 1,
+                    name: "Iphone",
+                    price: 10000000,
+                    image: "https://cdn1.viettelstore.vn/images/Product/ProductImage/medium/1100345574.jpeg",
+                    status: true
+                },
+                {
+                    id: 2,
+                    name: "Samsung",
+                    price: 20000000,
+                    image: "https://cdn.tgdd.vn/Products/Images/42/113263/samsung-galaxy-s9-black-600x600.jpg",
+                    status: true
+                },
+                {
+                    id: 3,
+                    name: "Xiaomi",
+                    price: 30000000,
+                    image: "https://cdn.tgdd.vn/Products/Images/42/182153/oppo-f9-tim-600x600.jpg",
+                    status: true
+                }
+            ],
+            isActive: true
+        }
+    }
+    onSetState = () => {
+        // if (this.state.isActive === true){
+        //     this.setState({
+        //         isActive: false
+        //     })
+        // }else {
+        //     this.setState({
+        //         isActive: true
+        //     })
+        // }
+        this.setState({
+            isActive: !this.state.isActive
+        })
+    }
+
+    // onAddProduct = () => {
+    //     console.log(this.refs.name.value)
+    // }
+    render() {
+        const elements = this.state.products.map((product, index) => {
+            let result = '';
+            if (product.status) {
+                result = <tr>
+                    <td>{index}</td>
+                    <td>{product.name}</td>
+                    <td>
+                        <span>{product.price}</span>
+                    </td>
+                </tr>
+            }
+            return result;
+        });
+        return (
+            <div>
+                <nav className="navbar navbar-inverse">
+                    <div className="container-fluid">
+                        <a className="navbar-brand">Props</a>
+                    </div>
+                </nav>
+                <div className="container">
+                    <div className="row">
+                        <table className="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Ten Sp</th>
+                                <th>Gia</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {elements}
+                            </tbody>
+                        </table>
+                        <button className="btn btn-warning" onClick={this.onSetState}>
+                            Active: {this.state.isActive === true ? 'true' : 'false'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        )
+    }
+}
+
+export default App;
